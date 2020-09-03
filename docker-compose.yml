@@ -1,0 +1,68 @@
+version: "3.7"
+
+services:
+  app:
+    build:
+      context: .
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "9000:9000"
+
+  ui:
+    image: node:latest
+    volumes:
+      - .:/app
+    working_dir: /app
+    user: "1000"
+    entrypoint: ['npm']
+    command: run watch
+
+  nginx:
+    image: nginx:stable-alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+      - ./.docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app
+      - db
+
+  db:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: inventory-control
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - db_data:/var/lib/mysql
+
+  artisan:
+    build:
+      context: .
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+    working_dir: /app
+    entrypoint: ['php', '/app/artisan']
+
+  composer:
+    image: composer:latest
+    volumes:
+      - .:/var/www/html
+    working_dir: /var/www/html
+    user: "1000"
+
+  npm:
+    image: node:latest
+    volumes:
+      - .:/app
+    working_dir: /app
+    user: "1000"
+    entrypoint: ['npm']
+
+volumes:
+  db_data:
