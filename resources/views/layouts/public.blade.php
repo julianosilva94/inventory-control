@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('container')
-    <main>
+    <main class="flex h-screen items-center justify-center p-6">
         @yield('page')
     </main>
 @endsection
