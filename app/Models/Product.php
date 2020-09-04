@@ -22,4 +22,9 @@ class Product extends Model
         'description',
         'quantity',
     ];
+
+    public function stockMovements()
+    {
+        return $this->hasMany('App\Models\StockMovement');
+    }
 }
