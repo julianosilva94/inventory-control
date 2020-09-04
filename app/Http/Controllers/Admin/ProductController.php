@@ -21,6 +21,15 @@ class ProductController extends Controller
         ]);
     }
 
+    public function findBySku(Request $request, string $sku)
+    {
+        $product = Product::firstWhere('sku', $sku);
+
+        return response()->json([
+            'product' => $product,
+        ]);
+    }
+
     public function store(Request $request)
     {
         $data = $this->validate($request, [

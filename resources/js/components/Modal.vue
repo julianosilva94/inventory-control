@@ -9,7 +9,7 @@
                     <slot></slot>
                 </div>
                 <div class="p-4 bg-gray-100 border-t-2 flex justify-end gap-x-2">
-                    <button @click="confirm" type="button" class="border rounded bg-red-500 hover:bg-red-600 text-white px-6 py-1">Salvar</button>
+                    <button @click="confirm" type="button" class="border rounded bg-green-500 hover:bg-green-600 text-white px-6 py-1">Salvar</button>
                     <button @click="cancel" type="button" class="border rounded bg-gray-100 hover:bg-gray-200 px-6 py-1">Cancelar</button>
                 </div>
             </div>

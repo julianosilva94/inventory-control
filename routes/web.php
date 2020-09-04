@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\StockMovementController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,8 +22,12 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/produtos',  [ProductController::class, 'index'])->name('products.index');
     Route::get('/produtos/listar',  [ProductController::class, 'getAll'])->name('products.getAll');
+    Route::get('/produtos/buscar-sku/{sku}',  [ProductController::class, 'findBySku'])->name('products.findBySku');
     Route::post('/produtos',  [ProductController::class, 'store'])->name('products.store');
     Route::put('/produtos/{product}',  [ProductController::class, 'update'])->name('products.update');
+
+    Route::post('/estoque/entrada',  [StockMovementController::class, 'checkIn'])->name('stock.checkIn');
+    Route::post('/estoque/saida',  [StockMovementController::class, 'checkOut'])->name('stock.checkOut');
 });
 
 Route::get('/login', [LoginController::class, 'index'])->name('login.index');

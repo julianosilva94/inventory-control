@@ -2,7 +2,7 @@
 
 @section('page')
     <div class="container">
-        <hr />
+        <stock-manager></stock-manager>
         @if (count($productsWithLowStock) > 0)
         <h2 class="my-6 text-2xl font-semibold text-red-700 dark:text-red-200">
             Produtos com estoque baixo
@@ -39,7 +39,6 @@
                 </table>
             </div>
         </div>
-        <hr />
         @endif
         <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
             Movimentações do dia

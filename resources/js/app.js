@@ -20,6 +20,7 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('products-page', require('./components/ProductsPage.vue').default);
+Vue.component('stock-manager', require('./components/StockManager.vue').default);
 Vue.component('modal', require('./components/Modal.vue').default);
 
 /**
