@@ -26,4 +26,11 @@ class LoginController extends Controller
 
         return redirect()->to(route('login.index'));
     }
+
+    public function logout()
+    {
+        Auth::logout();
+
+        return redirect()->to(route('login.index'));
+    }
 }
