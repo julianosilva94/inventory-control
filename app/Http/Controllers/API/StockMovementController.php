@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\StockMovement;
+use App\Services\StockMovementService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -25,38 +26,20 @@ class StockMovementController extends Controller
             ], 400);
         }
 
-        $skus = array_column($request->products, 'sku');
-        /** @var Product[] $productsMap */
-        $productsMap = Product::whereIn('sku', $skus)->get()->mapWithKeys(function ($item) {
-            return [$item['sku'] => $item];
-        });;
+        $products = [];
 
         try {
-            DB::transaction(function() use ($request, $productsMap) {
-                foreach ($request->products as $value) {
-                    $product = $productsMap[$value['sku']];
+            $checkIn = true;
 
-                    $product->quantity += $value['quantity'];
-                    $product->save();
-
-                    $movement = new StockMovement($value);
-                    $movement->system = 'api';
-                    $movement->in = true;
-                    $movement->product()->associate($product);
-                    $movement->save();
-                }
-            });
+            $service = new StockMovementService();
+            $products = $service->processEntries($request->products, $checkIn);
         } catch (\Throwable $exception) {
             return response()->json([
                 'errors' => [$exception->getMessage()],
             ], 400);
         }
 
-        $products = Product::whereIn('sku', $skus)->get();
-
-        return response()->json([
-            'products' => $products
-        ]);
+        return response()->json(compact('products'));
     }
 
     public function remove(Request $request)
@@ -73,41 +56,19 @@ class StockMovementController extends Controller
             ], 400);
         }
 
-        $skus = array_column($request->products, 'sku');
-        /** @var Product[] $productsMap */
-        $productsMap = Product::whereIn('sku', $skus)->get()->mapWithKeys(function ($item) {
-            return [$item['sku'] => $item];
-        });;
+        $products = [];
 
         try {
-            DB::transaction(function() use ($request, $productsMap) {
-                foreach ($request->products as $value) {
-                    $product = $productsMap[$value['sku']];
+            $checkIn = false;
 
-                    if ($value['quantity'] > $product->quantity) {
-                        throw new \Exception("quantity for SKU '{$product->sku}' need to be lesser or equals than product quantity in stock");
-                    }
-
-                    $product->quantity -= $value['quantity'];
-                    $product->save();
-
-                    $movement = new StockMovement($value);
-                    $movement->system = 'api';
-                    $movement->in = false;
-                    $movement->product()->associate($product);
-                    $movement->save();
-                }
-            });
+            $service = new StockMovementService();
+            $products = $service->processEntries($request->products, $checkIn);
         } catch (\Throwable $exception) {
             return response()->json([
                 'errors' => [$exception->getMessage()],
             ], 400);
         }
 
-        $products = Product::whereIn('sku', $skus)->get();
-
-        return response()->json([
-            'products' => $products
-        ]);
+        return response()->json(compact('products'));
     }
 }
