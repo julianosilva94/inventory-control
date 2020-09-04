@@ -21,7 +21,7 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
-            return redirect()->to(route('admin.index'));
+            return redirect()->to(route('dashboard.index'));
         }
 
         return redirect()->to(route('login.index'));

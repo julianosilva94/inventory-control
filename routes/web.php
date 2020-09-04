@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Admin\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,8 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['middleware' => [ 'auth' ]], function () {
+Route::group(['middleware' => 'auth'], function () {
     Route::get('/',  [DashboardController::class, 'index'])->name('dashboard.index');
+
+    Route::get('/produtos',  [ProductController::class, 'index'])->name('products.index');
+    Route::get('/produtos/listar',  [ProductController::class, 'getAll'])->name('products.getAll');
+    Route::post('/produtos',  [ProductController::class, 'store'])->name('products.store');
+    Route::put('/produtos/{product}',  [ProductController::class, 'update'])->name('products.update');
 });
 
 Route::get('/login', [LoginController::class, 'index'])->name('login.index');
