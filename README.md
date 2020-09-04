@@ -2,8 +2,10 @@
 
 ## Tecnologias Utilizadas
 - PHP 7.4
-- Laravel 7.x
+- Laravel 7
 - MySQL 5.7
+- Vue 2.5
+- TailwindCSS 1.7
 
 ## Ambiente Local
 ### Pré-requisitos
