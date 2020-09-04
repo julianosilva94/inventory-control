@@ -4,7 +4,7 @@
             <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
                 Movimentações do dia
             </h2>
-            <date-picker class="my-6 ml-6" v-model="date" @input="load" type="date" :clearable="false" format="DD/MM/YYYY"></date-picker>
+            <date-picker class="my-6 ml-6 z-40" v-model="date" @input="load" type="date" :clearable="false" format="DD/MM/YYYY"></date-picker>
         </div>
         <div v-if="movements.length === 0">
             <h2 class="my-6 text-xl font-semibold text-gray-700 dark:text-gray-200">

@@ -1,6 +1,6 @@
 <template>
     <transition name="fade">
-        <div v-if="visible" class="bg-black bg-opacity-50 absolute inset-0 flex items-center justify-center">
+        <div v-if="visible" class="bg-black bg-opacity-50 absolute inset-0 flex items-center justify-center z-50">
             <div class="bg-gray-100 w-1/2 rounded">
                 <div class="border-b-2 px-4 py-2 bg-gray-100">
                     <span class="text-xl">{{ title }}</span>

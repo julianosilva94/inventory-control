@@ -43558,7 +43558,7 @@ var render = function() {
           "div",
           {
             staticClass:
-              "bg-black bg-opacity-50 absolute inset-0 flex items-center justify-center"
+              "bg-black bg-opacity-50 absolute inset-0 flex items-center justify-center z-50"
           },
           [
             _c("div", { staticClass: "bg-gray-100 w-1/2 rounded" }, [
@@ -44147,7 +44147,7 @@ var render = function() {
         ),
         _vm._v(" "),
         _c("date-picker", {
-          staticClass: "my-6 ml-6",
+          staticClass: "my-6 ml-6 z-40",
           attrs: { type: "date", clearable: false, format: "DD/MM/YYYY" },
           on: { input: _vm.load },
           model: {
