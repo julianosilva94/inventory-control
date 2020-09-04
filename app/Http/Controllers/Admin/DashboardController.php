@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use App\Models\StockMovement;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -14,6 +15,8 @@ class DashboardController extends Controller
     {
         $movements = StockMovement::whereDate('created_at', Carbon::today())->orderByDesc('created_at')->get();
 
-        return view('pages.admin.dashboard', compact('movements'));
+        $productsWithLowStock = Product::where('quantity', '<', 100)->orderBy('quantity')->get();
+
+        return view('pages.admin.dashboard', compact('movements', 'productsWithLowStock'));
     }
 }
