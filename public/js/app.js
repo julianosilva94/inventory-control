@@ -2039,6 +2039,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ProductsPage",
   data: function data() {
@@ -4227,15 +4242,23 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { staticClass: "flex flex-col gap-y-4" },
     [
       _c("div", { staticClass: "flex justify-between" }, [
-        _c("h1", { staticClass: "text-2xl" }, [_vm._v("Lista de Produtos")]),
+        _c(
+          "h2",
+          {
+            staticClass:
+              "text-2xl font-semibold text-gray-700 dark:text-gray-200"
+          },
+          [_vm._v("\n            Lista de Produtos\n        ")]
+        ),
         _vm._v(" "),
         _c(
           "button",
           {
             staticClass:
-              "border rounded bg-red-500 hover:bg-red-600 text-white px-6 py-1",
+              "border rounded bg-green-500 hover:bg-green-600 text-white px-6 py-1",
             attrs: { type: "button" },
             on: {
               click: function($event) {
@@ -4247,48 +4270,73 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("table", { staticClass: "table-auto bg-white w-full rounded my-2" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c(
-          "tbody",
-          _vm._l(_vm.products, function(product) {
-            return _c("tr", [
-              _c("td", { staticClass: "border px-4 py-2" }, [
-                _vm._v(_vm._s(product.sku))
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "border px-4 py-2" }, [
-                _vm._v(_vm._s(product.name))
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "border px-4 py-2" }, [
-                _vm._v(_vm._s(product.description))
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "border px-4 py-2" }, [
-                _vm._v(_vm._s(product.quantity))
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "border px-4 py-2" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "text-yellow-600",
-                    attrs: { href: "#" },
-                    on: {
-                      click: function($event) {
-                        return _vm.selectProduct(product)
-                      }
-                    }
-                  },
-                  [_vm._v("Editar")]
-                )
-              ])
-            ])
-          }),
-          0
-        )
+      _c("div", { staticClass: "w-full rounded shadow-xs" }, [
+        _c("div", { staticClass: "w-full" }, [
+          _c("table", { staticClass: "w-full whitespace-no-wrap" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              {
+                staticClass:
+                  "bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
+              },
+              _vm._l(_vm.products, function(product) {
+                return _c("tr", [
+                  _c("td", { staticClass: "px-4 py-3 text-sm" }, [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(product.sku) +
+                        "\n                        "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "px-4 py-3 text-sm" }, [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(product.name) +
+                        "\n                        "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "px-4 py-3 text-sm" }, [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(product.description) +
+                        "\n                        "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "px-4 py-3 text-sm" }, [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(product.quantity) +
+                        "\n                        "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border px-4 py-2" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass:
+                          "px-3 hover:bg-gray-100 rounded text-yellow-600",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.selectProduct(product)
+                          }
+                        }
+                      },
+                      [_vm._v("Editar")]
+                    )
+                  ])
+                ])
+              }),
+              0
+            )
+          ])
+        ])
       ]),
       _vm._v(" "),
       _c(
@@ -4441,17 +4489,24 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("thead", [
-      _c("tr", [
-        _c("th", { staticClass: "px-4 py-2" }, [_vm._v("SKU")]),
-        _vm._v(" "),
-        _c("th", { staticClass: "px-4 py-2" }, [_vm._v("Nome")]),
-        _vm._v(" "),
-        _c("th", { staticClass: "px-4 py-2" }, [_vm._v("Descrição")]),
-        _vm._v(" "),
-        _c("th", { staticClass: "px-4 py-2" }, [_vm._v("Qtd em Estoque")]),
-        _vm._v(" "),
-        _c("th", { staticClass: "px-4 py-2" })
-      ])
+      _c(
+        "tr",
+        {
+          staticClass:
+            "text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
+        },
+        [
+          _c("th", { staticClass: "px-2 py-3" }, [_vm._v("SKU")]),
+          _vm._v(" "),
+          _c("th", { staticClass: "px-4 py-3" }, [_vm._v("Produto")]),
+          _vm._v(" "),
+          _c("th", { staticClass: "px-4 py-3" }, [_vm._v("Descrição")]),
+          _vm._v(" "),
+          _c("th", { staticClass: "px-4 py-3" }, [_vm._v("Quantidade")]),
+          _vm._v(" "),
+          _c("th", { staticClass: "px-4 py-3" })
+        ]
+      )
     ])
   }
 ]
