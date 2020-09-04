@@ -19,7 +19,7 @@
         </div>
 
         <div>
-            <button type="submit" class="border rounded bg-red-500 hover:bg-red-600 text-white text-lg px-6 py-1">Entrar</button>
+            <button type="submit" class="border rounded bg-blue-800 hover:bg-blue-900 text-white text-lg px-6 py-1">Entrar</button>
         </div>
     </form>
 @endsection
