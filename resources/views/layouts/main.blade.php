@@ -13,7 +13,7 @@
     <script src="/js/app.js" defer></script>
 </head>
 <body>
-    <div id="app" class="w-screen h-screen bg-gray-300">
+    <div id="app" class="w-full h-full min-h-screen pb-20 bg-gray-100">
         @yield('container')
     </div>
 </body>

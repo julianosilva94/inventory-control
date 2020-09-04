@@ -16,7 +16,7 @@
         </div>
     </header>
 
-    <main class="my-6 flex justify-center">
+    <main class="mt-6 flex justify-center">
         @yield('page')
     </main>
 @endsection
