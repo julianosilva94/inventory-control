@@ -5,12 +5,23 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\StockMovement;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 class StockMovementController extends Controller
 {
+    public function getByDate(Request $request, string $date)
+    {
+        $movements = StockMovement::whereDate('created_at', '=', Carbon::parse($date))
+            ->with('product')
+            ->orderByDesc('created_at')
+            ->get();
+
+        return response()->json(compact('movements'));
+    }
+
     public function checkIn(Request $request)
     {
         $validator = Validator::make($request->all(), [

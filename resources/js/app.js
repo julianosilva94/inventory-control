@@ -21,6 +21,7 @@ window.Vue = require('vue');
 
 Vue.component('products-page', require('./components/ProductsPage.vue').default);
 Vue.component('stock-manager', require('./components/StockManager.vue').default);
+Vue.component('stock-movements', require('./components/StockMovements.vue').default);
 Vue.component('modal', require('./components/Modal.vue').default);
 
 /**

@@ -26,6 +26,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/produtos',  [ProductController::class, 'store'])->name('products.store');
     Route::put('/produtos/{product}',  [ProductController::class, 'update'])->name('products.update');
 
+    Route::get('/estoque/historico/{date}',  [StockMovementController::class, 'getByDate'])->name('stock.getByDate');
     Route::post('/estoque/entrada',  [StockMovementController::class, 'checkIn'])->name('stock.checkIn');
     Route::post('/estoque/saida',  [StockMovementController::class, 'checkOut'])->name('stock.checkOut');
 });
