@@ -2154,6 +2154,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -2230,39 +2238,64 @@ __webpack_require__.r(__webpack_exports__);
       this.showModal = false;
       this.entries = [];
     },
-    registerEntries: function registerEntries() {
-      var url = 'estoque/entrada';
+    registerEntries: function () {
+      var _registerEntries = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var url, entries;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                url = 'estoque/entrada';
 
-      if (this.action === 'out') {
-        url = 'estoque/saida';
+                if (this.action === 'out') {
+                  url = 'estoque/saida';
+                }
+
+                entries = this.entries.map(function (_ref) {
+                  var sku = _ref.sku,
+                      quantity = _ref.quantity;
+                  return {
+                    sku: sku,
+                    quantity: quantity
+                  };
+                });
+                _context.next = 5;
+                return axios.post(url, {
+                  products: entries
+                });
+
+              case 5:
+                window.location = window.location;
+
+              case 6:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function registerEntries() {
+        return _registerEntries.apply(this, arguments);
       }
 
-      var entries = this.entries.map(function (_ref) {
-        var sku = _ref.sku,
-            quantity = _ref.quantity;
-        return {
-          sku: sku,
-          quantity: quantity
-        };
-      });
-      axios.post(url, {
-        products: entries
-      }).then(function (_ref2) {
-        var data = _ref2.data;
-        console.log(data);
-      });
-    },
+      return registerEntries;
+    }(),
     checkEntry: function checkEntry(entry, index) {
       var _this = this;
 
       var sku = entry.sku.trim();
 
       if (sku) {
-        axios.get("produtos/buscar-sku/".concat(sku)).then(function (_ref3) {
-          var product = _ref3.data.product;
+        axios.get("produtos/buscar-sku/".concat(sku)).then(function (_ref2) {
+          var product = _ref2.data.product;
           var validSku = !!product;
           _this.entries[index].validSku = validSku;
-          _this.entries[index].validQty = validSku && entry.quantity > 0 && entry.quantity <= product.quantity;
+          _this.entries[index].validQty = validSku && entry.quantity > 0;
+
+          if (_this.action === 'out') {
+            _this.entries[index].validQty = _this.entries[index].validQty && entry.quantity <= product.quantity;
+          }
         });
       }
     }
@@ -2370,7 +2403,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
     load: function load() {
       var _this = this;
 
-      axios.get("estoque/historico/".concat(this.date.toISOString().slice(0, 10))).then(function (_ref) {
+      axios.get("estoque/historico/".concat(moment(this.date).format('YYYY-MM-DD'))).then(function (_ref) {
         var movements = _ref.data.movements;
         _this.movements = movements;
       });
@@ -43695,7 +43728,7 @@ var render = function() {
                   _c("td", { staticClass: "px-4 py-3 text-sm" }, [
                     _vm._v(
                       "\n                            " +
-                        _vm._s(product.description) +
+                        _vm._s(product.description.slice(0, 30)) +
                         "\n                        "
                     )
                   ]),

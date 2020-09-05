@@ -28,7 +28,7 @@
                                 {{ product.name }}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ product.description }}
+                                {{ product.description.slice(0, 30) }}
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 {{ product.quantity }}
