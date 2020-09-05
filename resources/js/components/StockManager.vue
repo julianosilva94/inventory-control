@@ -75,7 +75,7 @@ export default {
             this.showModal = false;
             this.entries = [];
         },
-        registerEntries: function () {
+        registerEntries: async function () {
             let url = 'estoque/entrada';
 
             if (this.action === 'out') {
@@ -86,11 +86,9 @@ export default {
                 return { sku, quantity };
             });
 
-            axios
-                .post(url, { products: entries })
-                .then(({ data }) => {
-                    console.log(data);
-                })
+            await axios.post(url, { products: entries });
+
+            window.location = window.location;
         },
         checkEntry: function (entry, index) {
             const sku = entry.sku.trim();
