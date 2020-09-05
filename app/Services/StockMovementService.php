@@ -44,7 +44,7 @@ class StockMovementService
 
                 $movement = new StockMovement($entry);
                 $movement->system = 'admin';
-                $movement->in = true;
+                $movement->in = $checkIn;
                 $movement->product()->associate($product);
                 $movement->save();
             }
