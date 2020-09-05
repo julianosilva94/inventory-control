@@ -102,7 +102,11 @@ export default {
                         const validSku = !!product;
 
                         this.entries[index].validSku = validSku;
-                        this.entries[index].validQty = (validSku && entry.quantity > 0 && entry.quantity <= product.quantity);
+                        this.entries[index].validQty = (validSku && entry.quantity > 0);
+
+                        if (this.action === 'out') {
+                            this.entries[index].validQty = this.entries[index].validQty && entry.quantity <= product.quantity;
+                        }
                     })
             }
         },
