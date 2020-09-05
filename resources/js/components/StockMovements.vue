@@ -79,7 +79,7 @@ export default {
     methods: {
       load: function () {
           axios
-              .get(`estoque/historico/${this.date.toISOString().slice(0,10)}`)
+              .get(`estoque/historico/${moment(this.date).format('YYYY-MM-DD')}`)
               .then(({ data: { movements } }) => {
                   this.movements = movements;
               })
