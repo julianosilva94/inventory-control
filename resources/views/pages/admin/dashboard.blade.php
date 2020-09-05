@@ -24,7 +24,7 @@
                                     <div>
                                         <p class="font-semibold">{{ $product->name }}</p>
                                         <p class="text-xs text-gray-600 dark:text-gray-400">
-                                            SKU {{ $product->name }}
+                                            SKU {{ $product->sku }}
                                         </p>
                                     </div>
                                 </div>
